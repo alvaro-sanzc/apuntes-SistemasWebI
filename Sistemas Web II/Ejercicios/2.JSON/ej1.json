@@ -1,0 +1,57 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema#",
+    "$id": "http://example.com/schemas/painting.schema.json",
+    "type": "object",
+    "title": "Painting",
+    "description": "Paintinginformation",
+    "required": ["name", "artist", "dimension", "description", "tags"],
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Paintingname"
+        },
+        "artist": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "Nameoftheartist"
+        },
+        "description": {
+            "type": ["string", "null"],
+            "description": "Paintingdescription"
+        },
+        "dimension": { "$ref": "#/$defs/dimension" },
+        "tags": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/tag" }
+        }
+    },
+    "$defs": {
+        "tag": {
+            "type": "string",
+            "enum": ["oil", "watercolor", "digital", "famous"]
+        },
+        "dimension": {
+            "type": "object",
+            "title": "Paintingdimension",
+            "description": "Describes thedimensionofa paintingin cm",
+            "required": ["width", "height"],
+            "properties": {
+            "width": { "type": "number", "description": "Widthoftheproduct", "minimum": 1 },
+            "height": { "type": "number", "description": "Heightoftheproduct", "minimum": 1 }
+            }
+        }
+    }
+}
+
+
+//JSON VÁLIDO
+{
+    "name": "Las Meninas",
+    "artist": "Diego Velázquez",
+    "description": "Great painting from Spain",
+    "dimension": {
+        "width": 10,
+        "height": 5.4
+    },
+    "tags": ["oil", "famous"]
+}

@@ -1,0 +1,43 @@
+// MAL FORMADO ENUNCIADO:
+{
+"nombre": "Juan",
+"telefonos": [
+{"movil": 612345678},
+{"fijo": [912345678]}, false
+]
+edad: 27, mayorDeEdad: "true",
+"direccion": {
+"calle": "Avenida Ciudad de Barcelona 23",
+"ciudad": Madrid, null
+},
+}
+
+/* ERRORES
+1: (7) Los campos edad y mayorDeEdad deberían ir entre comillas
+2: (7) "true" debería de ir sin comillas ya que es un booleano no un string
+3: (10) El atributo Madrid entre comillas
+4: (12) La coma sobra ya que solo hay un elemento
+
+NOTA: EN JSON ES VÁLIDO
+1: (5) "fijo" es int no array. Es inconsistente pero válido
+2: (5) El false sobra
+3: (10) El null sobra
+*/
+
+
+// BIEN FORMADO
+{
+    "nombre": "Juan",
+    "telefonos": [
+        {"movil": 612345678},
+        {"fijo": [912345678]}, false
+    ],
+    "edad": 27,
+    "mayorDeEdad": true,
+    "direccion": {
+        "calle": "Avenida Ciudad de Barcelona 23",
+        "ciudad": "Madrid", null
+    }
+}
+
+// NO ES NECESARIO QUE TODOS LOS CONTACTOS TENGAN LA MISMA ESTRUCTURA

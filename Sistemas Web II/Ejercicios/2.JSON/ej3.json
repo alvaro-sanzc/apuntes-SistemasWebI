@@ -1,0 +1,111 @@
+/*
+Realiza los siguientes pasos:
+• Piensa en la información que podríamos guardar sobre diferentes películas
+• Diseña el JSON Schema. Ten en cuenta las posibles restricciones y que campos son obligatorios.
+• Crea al menos dos objetos JSON diferentes que sean válidos para el esquema anterior
+
+NOTA: Puedes usar páginas como Imdbo Rotten Tomatoes.
+*/
+
+
+// JSON SCHEMA CREADO
+{
+    "$schema": "[json-schema.org](https://json-schema.org/draft/2020-12/schema)",
+    "$id": "[example.com](https://example.com/movies.schema.json)",
+    "title": "Movies",
+    "description": "Schema for describing movies",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "Name of the movie"
+        },
+        "director": {
+            "type": "string",
+            "description": "Director of the movie"
+        },
+        "releaseYear": {
+            "type": "integer",
+            "description": "Year in which the movie was released",
+            "minimum": 1888
+        },
+        "genres": {
+            "type": "array",
+            "description": "List of genres",
+            "items": { "$ref": "#/$defs/genre" },
+            "minItems": 1
+        },
+        "duration": {
+            "$ref": "#/$defs/duration"
+        },
+        "country": {
+            "type": "string",
+            "description": "Country where the movie was produced"
+        },
+        "actors": {
+            "type": "array",
+            "description": "Main actors and actresses",
+            "items": { "type": "string" },
+            "minItems": 1
+        },
+        "adaptation": {
+            "type": "boolean",
+            "description": "True if the movie is based on a book or previous work"
+        },
+        "rating": {
+            "type": "number",
+            "description": "Average rating of the movie (0–10 scale)",
+            "minimum": 0,
+            "maximum": 10
+        }
+    },
+    "required": ["title", "director", "releaseYear", "genres", "duration"],
+    "additionalProperties": false,
+    "$defs": {
+        "genre": {
+            "type": "string",
+            "enum": ["action", "horror", "comedy", "romance", "sci-fi", "fantasy", "thriller", "drama", "animation"]
+        },
+        "duration": {
+            "type": "object",
+            "required": ["hours", "minutes"],
+            "properties": {
+                "hours": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "minutes": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 59
+                }
+            }
+        }
+    }
+}
+
+// 2 OBJETOS EN FORMATO JSON PERMITIDOS PARA EL JSON SCHEMA ANTERIOR
+[
+    {
+        "title": "Inception",
+        "director": "Christopher Nolan",
+        "releaseYear": 2010,
+        "genres": ["sci-fi", "thriller"],
+        "duration": { "hours": 2, "minutes": 28 },
+        "country": "USA",
+        "actors": ["Leonardo DiCaprio", "Elliot Page", "Joseph Gordon-Levitt"],
+        "adaptation": false,
+        "rating": 8.8
+    },
+    {
+        "title": "Pride & Prejudice",
+        "director": "Joe Wright",
+        "releaseYear": 2005,
+        "genres": ["drama", "romance"],
+        "duration": { "hours": 2, "minutes": 9 },
+        "country": "UK",
+        "actors": ["Keira Knightley", "Matthew Macfadyen", "Rosamund Pike"],
+        "adaptation": true,
+        "rating": 7.8
+    }
+]

@@ -1,0 +1,40 @@
+NOTAS de JSON SCHEMA:
+1. $schema, $id, title y description NO SON CAMPOS OBLIGATORIOS PERO RECOMENDADOS
+
+2. EN poner $schema, $id:
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/product.schema.json",  
+    ......
+
+3. En JSON Schema todo lleva "type". "description" es recomendable.
+    "name":{
+        "type": ...
+    }, "..."
+
+4. Si es "type":"array" poner "items" y si es "type":"object" poner "properties"
+    "members": {
+                "description": "Some characteristics for each group member",
+                "type": "array",
+                "items":{
+                    "type": "object",
+                    "properties": {
+                        "name":{
+                            "type": "string",
+                            "description": "Name of the superhero"
+                        },
+
+5. Para hacer referencias es "$ref/$defs/...."
+    "movies": {
+            "type": "array",
+            "description": "List of movies",
+            "items": { "$ref": "#/$defs/movie" },
+            "minItems": 1
+        }
+
+6. Los JSON SCHEMA de A y B no son iguales
+    A) Lista de películas indicando que son películas         
+    {
+        "movies": [
+            {...},{...}
+    B) Lista de películas
+    {....},{....}

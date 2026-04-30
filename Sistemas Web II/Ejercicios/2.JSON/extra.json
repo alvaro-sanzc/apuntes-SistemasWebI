@@ -1,0 +1,117 @@
+//NOTA EXTRA
+// EL poner "movies":[...] al principio para indicar que son los objetos JSON, hace que el JSON SCHEMA cambie
+
+
+// ESTE ES UN JSON
+{
+    "movies": [
+        {
+            "title": "Inception",
+            "director": "Christopher Nolan",
+            "releaseYear": 2010,
+            "genres": ["sci-fi", "thriller"],
+            "duration": { "hours": 2, "minutes": 28 },
+            "country": "USA",
+            "actors": ["Leonardo DiCaprio", "Elliot Page", "Joseph Gordon-Levitt"],
+            "adaptation": false,
+            "rating": 8.8
+        },
+        {
+            "title": "Pride & Prejudice",
+            "director": "Joe Wright",
+            "releaseYear": 2005,
+            "genres": ["drama", "romance"],
+            "duration": { "hours": 2, "minutes": 9 },
+            "country": "UK",
+            "actors": ["Keira Knightley", "Matthew Macfadyen", "Rosamund Pike"],
+            "adaptation": true,
+            "rating": 7.8
+        }
+    ]
+}
+
+// ESTE ES EL JSON SCHEMA VÁLIDO PARA EL JSON ANTERIOR
+
+{
+    "$schema": "[json-schema.org](https://json-schema.org/draft/2020-12/schema)",
+    "$id": "[example.com](https://example.com/moviesCollection.schema.json)",
+    "title": "Movies Collection",
+    "description": "A collection of movie objects",
+    "type": "object",
+    "properties": {
+        "movies": {
+            "type": "array",
+            "description": "List of movies",
+            "items": { "$ref": "#/$defs/movie" },
+            "minItems": 1
+        }
+    },
+    "required": ["movies"],
+    "additionalProperties": false,
+    "$defs": {
+        "movie": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Name of the movie"
+                },
+                "director": {
+                    "type": "string",
+                    "description": "Director of the movie"
+                },
+                "releaseYear": {
+                    "type": "integer",
+                    "minimum": 1888,
+                    "description": "Year the movie was released"
+                },
+                "genres": {
+                    "type": "array",
+                    "items": { "$ref": "#/$defs/genre" },
+                    "minItems": 1
+                },
+                "duration": { "$ref": "#/$defs/duration" },
+                "country": {
+                    "type": "string",
+                    "description": "Country of production"
+                },
+                "actors": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "minItems": 1
+                },
+                "adaptation": {
+                    "type": "boolean",
+                    "description": "True if based on a previous work"
+                },
+                "rating": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 10,
+                    "description": "Average rating (0–10)"
+                }
+            },
+            "required": ["title", "director", "releaseYear", "genres", "duration"],
+            "additionalProperties": false
+        },
+        "genre": {
+            "type": "string",
+            "enum": ["action", "horror", "comedy", "romance", "sci-fi", "fantasy", "thriller", "drama", "animation"]
+        },
+        "duration": {
+            "type": "object",
+            "required": ["hours", "minutes"],
+            "properties": {
+                "hours": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "minutes": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 59
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+ENUNCIADO
+• Crea un servicio web que valide al menos dos JSON diferentes que reciba por dos rutas POST. Para cada ruta:
+    - Que devuelva un 200 si el JSON es válido
+    – Que devuelva un 422 si el JSON no es válido o por cualquier otro error
+• Guarda cada schema en su archivo .json
+• Usa Bruno para comprobar que la aplicación funciona
+• Añadir en la actividad el enlace al repositorio
+
+PASOS:
+- npm start
+- en postman 
+    - POST http://localhost:3000/validate/movie 
+    - BODY: EL JSON

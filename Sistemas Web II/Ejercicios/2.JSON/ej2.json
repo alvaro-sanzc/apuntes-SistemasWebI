@@ -1,0 +1,88 @@
+// ENUNCIADO. PASA ESTE JSON A JSON SCHEMA
+{
+    "squadName": "Super herosquad",
+    "homeTown": "Metro City",
+    "formed": 2016,
+    "secretBase": "Super tower",
+    "active": true,
+    "members": [
+        {
+            "name": "MoleculeMan",
+            "age": 29,
+            "secretIdentity": "Dan Jukes",
+            "powers": [
+                "Radiationresistance",
+                "Turningtiny",
+                "Radiationblast"
+            ]
+        },
+        {
+            "name": "Madame Uppercut",
+            "age": 39,
+            "secretIdentity": "Jane Wilson",
+            "powers": [
+                "Milliontonnepunch",
+                "Damageresistance"
+            ]
+        }
+    ]
+}
+
+// JSON SCHEMA
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/product.schema.json",
+    "title": "Superheroes",
+    "description": "Description of groups of superheores",
+    "type": "object",
+    "properties": {
+        "squadName": {
+            "type": "string",
+            "description": "Superheores group name"
+        },
+        "homeTown": {
+            "type": "string",
+            "description": "Home Town of the superheores"
+        },
+        "formed": {
+            "type": "integer",
+            "description": "Year the group was created"
+        },
+        "secretBase": {
+            "type": "string",
+            "description": "Secret base of the group"
+        },
+        "active": {
+            "type": "boolean",
+            "description": "If the group is active or not"
+        },
+        "members": {
+            "description": "Some characteristics for each group member",
+            "type": "array",
+            "items":{
+                "type": "object",
+                "properties": {
+                    "name":{
+                        "type": "string",
+                        "description": "Name of the superhero"
+                    },
+                    "age": {
+                        "type": "integer",
+                        "description": "Age of the superhero"
+                    },
+                    "secretIdentity":{
+                        "type": "string",
+                        "description": "Secret identity the superhero"
+                    }, 
+                    "powers": {
+                        "description": "Description of the powers the superhero has",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }, "required": ["name", "age", "secretIdentity", "powers"]
+            }
+        }
+    }, "required": ["squadName", "homeTown", "formed", "secretBase", "active", "members"]
+}

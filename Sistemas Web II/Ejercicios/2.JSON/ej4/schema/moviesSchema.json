@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Movies Collection",
+  "type": "object",
+  "properties": {
+    "movies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/movie" }
+    }
+  },
+  "required": ["movies"],
+  "$defs": {
+    "movie": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "director": { "type": "string" },
+        "releaseYear": { "type": "integer" },
+        "genres": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "duration": {
+          "type": "object",
+          "properties": {
+            "hours": { "type": "integer" },
+            "minutes": { "type": "integer" }
+          },
+          "required": ["hours", "minutes"]
+        }
+      },
+      "required": ["title", "director", "releaseYear", "genres", "duration"]
+    }
+  }
+}

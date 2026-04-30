@@ -1,0 +1,7 @@
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "releaseYear": 2010,
+  "genres": ["sci-fi", "thriller"],
+  "duration": { "hours": 2, "minutes": 28 }
+}
